@@ -25,4 +25,4 @@ www/index.html
 www/articles/...
 ```
 
-Для просмотра запустите файл `index.html`
+Для просмотра запустите файл  [index.html](https://jackssn.github.io/19_site_generator/www/index.html)
