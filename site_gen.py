@@ -6,6 +6,7 @@ from jinja2 import Environment, FileSystemLoader
 
 PATH = os.path.dirname(os.path.abspath(__file__))
 ARTICLES_HTML_PATH = 'www/articles'
+ARTICLES_MD_PATH = 'articles'
 TEMPLATE_ENVIRONMENT = Environment(
     autoescape=False,
     loader=FileSystemLoader(os.path.join(PATH, '.')),
@@ -33,7 +34,7 @@ def load_config_data():
 
 
 def get_html_from_md(path_md):
-    with open('articles/%s' % path_md, 'r', encoding='utf-8') as f:
+    with open('%s/%s' % (ARTICLES_MD_PATH, path_md), 'r', encoding='utf-8') as f:
         return markdown.markdown(f.read(), extensions=['markdown.extensions.codehilite'])
 
 
