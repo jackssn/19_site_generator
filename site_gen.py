@@ -5,7 +5,8 @@ from jinja2 import Environment, FileSystemLoader
 
 
 PATH = os.path.dirname(os.path.abspath(__file__))
-ARTICLES_HTML_PATH = 'www/articles'
+BASE_PATH = 'www'
+ARTICLES_HTML_PATH = os.path.join(BASE_PATH, 'articles')
 ARTICLES_MD_PATH = 'articles'
 TEMPLATE_ENVIRONMENT = Environment(
     autoescape=False,
@@ -33,18 +34,22 @@ def load_config_data():
         return json.load(f)
 
 
-def create_html_from_md(path_md):
+def read_md_file(path_md):
     with open(os.path.join(ARTICLES_MD_PATH, path_md), 'r', encoding='utf-8') as f:
-        return markdown.markdown(f.read(), extensions=['markdown.extensions.codehilite'])
+        return f.read()
 
 
-def get_article_dict_with_link(article_dict):
-    article_path = article_dict['source']
-    article_slug = '%s.html' % article_path[article_path.find("/") + 1:article_path.find(".")]
-    article_link = os.path.join(ARTICLES_HTML_PATH, article_dict['topic'], article_slug)
+def create_html_from_md(md_text):
+    return markdown.markdown(md_text, extensions=['markdown.extensions.codehilite'])
+
+
+def create_article_dict_with_link(raw_article_dict):
+    article_path = raw_article_dict['source']
+    article_slug = '{}.html'.format(os.path.splitext(os.path.basename(article_path))[0])
+    article_link = os.path.join(ARTICLES_HTML_PATH, raw_article_dict['topic'], article_slug)
     article_context = {
-        'article_title': article_dict['title'],
-        'article_text': create_html_from_md(article_path),
+        'article_title': raw_article_dict['title'],
+        'article_text': create_html_from_md(read_md_file(article_path)),
         'path': '../../../',
         'back_btn': True
     }
@@ -55,18 +60,18 @@ if __name__ == "__main__":
     config_data = load_config_data()
     articles_dict = config_data['articles']
     topics_dict = config_data['topics']
-    create_dir('www')
-    create_dir('www/articles')
+    create_dir(BASE_PATH)
+    create_dir(ARTICLES_HTML_PATH)
     for topic in topics_dict:
         create_dir(os.path.join(ARTICLES_HTML_PATH, topic['slug']))
 
     articles_dict_with_links = []
     for article_dict in articles_dict:
-        article_dict_with_link = get_article_dict_with_link(article_dict)
+        article_dict_with_link = create_article_dict_with_link(article_dict)
         articles_dict_with_links.append(article_dict_with_link)
         save_html_page(article_dict_with_link['link'], article_dict_with_link['context'])
 
-    index_filepath = "www/index.html"
+    index_filepath = os.path.join(BASE_PATH, "index.html")
     index_context = {
         'article_title': 'Cписок статей',
         'articles_dict_with_links': articles_dict_with_links,
