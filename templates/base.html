@@ -10,10 +10,11 @@
 
     <link rel="stylesheet" type="text/css" href="{{ path }}static/css/bootstrap.min.css" />
     <link rel="stylesheet" type="text/css" href="{{ path }}static/css/styles.css" />
+    <link rel="stylesheet" type="text/css" href="{{ path }}static/css/codehilite.css" />
 
   </head>
 
-  <body style="background: #f4d647">
+  <body>
     <nav class="navbar navbar-fixed-top navbar-dark bg-inverse">
       <div class="container">
         <a class="navbar-brand" href="{{ path }}www/index.html">
@@ -29,15 +30,17 @@
             <button type="button" class="btn btn-primary btn-sm" data-toggle="offcanvas">Toggle nav</button>
           </p>
           <div class="jumbotron">
-            <h1>{{article_title}}</h1>
-            <p>{{article_text}}</p>
+              <div class="article">
+                <h1>{{article_title}}</h1>
+                <p>{{article_text}}</p>
 
-              {% for article_dict in articles_dict_with_links %}
-                <ul>
-                    <li><a href="../{{article_dict['link']}}">{{article_dict['context']['article_title']}}</a></li>
-                </ul>
-              {% endfor %}
+                  {% for article_dict in articles_dict_with_links %}
+                    <ul>
+                        <li><a href="../{{article_dict['link']}}">{{article_dict['context']['article_title']}}</a></li>
+                    </ul>
+                  {% endfor %}
 
+              </div>
           </div>
           <div class="row">
 
@@ -46,7 +49,9 @@
 
         <div class="col-6 col-sm-3 sidebar-offcanvas" id="sidebar">
           <div class="list-group">
-              {{ back_btn }}
+              {% if back_btn %}
+                  <a href="javascript:history.back();" class="list-group-item">Вернуться назад</a>
+              {% endif %}
           </div>
         </div><!--/span-->
       </div><!--/row-->
@@ -54,7 +59,7 @@
       <hr>
 
       <footer >
-        <p style="font-size: 12px">
+        <p>
             Devman 2017
         </p>
       </footer>

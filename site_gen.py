@@ -33,20 +33,20 @@ def load_config_data():
         return json.load(f)
 
 
-def get_html_from_md(path_md):
-    with open('%s/%s' % (ARTICLES_MD_PATH, path_md), 'r', encoding='utf-8') as f:
+def create_html_from_md(path_md):
+    with open(os.path.join(ARTICLES_MD_PATH, path_md), 'r', encoding='utf-8') as f:
         return markdown.markdown(f.read(), extensions=['markdown.extensions.codehilite'])
 
 
 def get_article_dict_with_link(article_dict):
     article_path = article_dict['source']
-    article_slug = article_path[article_path.find("/") + 1:article_path.find(".")]
-    article_link = "%s/%s/%s.html" % (ARTICLES_HTML_PATH, article_dict['topic'], article_slug)
+    article_slug = '%s.html' % article_path[article_path.find("/") + 1:article_path.find(".")]
+    article_link = os.path.join(ARTICLES_HTML_PATH, article_dict['topic'], article_slug)
     article_context = {
         'article_title': article_dict['title'],
-        'article_text': get_html_from_md(article_path),
+        'article_text': create_html_from_md(article_path),
         'path': '../../../',
-        'back_btn': '<a href="javascript:history.back();" class="list-group-item">Вернуться назад</a>'
+        'back_btn': True
     }
     return {'link': article_link, 'context': article_context}
 
@@ -58,7 +58,7 @@ if __name__ == "__main__":
     create_dir('www')
     create_dir('www/articles')
     for topic in topics_dict:
-        create_dir('%s/%s' % (ARTICLES_HTML_PATH, topic['slug']))
+        create_dir(os.path.join(ARTICLES_HTML_PATH, topic['slug']))
 
     articles_dict_with_links = []
     for article_dict in articles_dict:
@@ -71,6 +71,6 @@ if __name__ == "__main__":
         'article_title': 'Cписок статей',
         'articles_dict_with_links': articles_dict_with_links,
         'path': '../',
-        'back_btn': ''
+        'back_btn': False
     }
     save_html_page(index_filepath, index_context)

@@ -10,10 +10,11 @@
 
     <link rel="stylesheet" type="text/css" href="../../../static/css/bootstrap.min.css" />
     <link rel="stylesheet" type="text/css" href="../../../static/css/styles.css" />
+    <link rel="stylesheet" type="text/css" href="../../../static/css/codehilite.css" />
 
   </head>
 
-  <body style="background: #f4d647">
+  <body>
     <nav class="navbar navbar-fixed-top navbar-dark bg-inverse">
       <div class="container">
         <a class="navbar-brand" href="../../../www/index.html">
@@ -29,8 +30,9 @@
             <button type="button" class="btn btn-primary btn-sm" data-toggle="offcanvas">Toggle nav</button>
           </p>
           <div class="jumbotron">
-            <h1>История</h1>
-            <p><p>История изменений в коде очень важна при работе в команде. По ней программисты ориентируются.</p>
+              <div class="article">
+                <h1>История</h1>
+                <p><p>История изменений в коде очень важна при работе в команде. По ней программисты ориентируются.</p>
 <p>Такие емкие комментарии как "исправлено", "обновлено", "сделано" не только бесполезны, но
 они заставляют вычитывать код чтобы разобраться в смысле изменений внесенных кем-то другим. 
 Это время и нервы помноженные на размер команды. Не делай так!</p>
@@ -40,8 +42,9 @@
 <li><a href="http://chris.beams.io/posts/git-commit/">How to Write a Git Commit Message</a> (en)</li>
 </ul></p>
 
-              
+                  
 
+              </div>
           </div>
           <div class="row">
 
@@ -50,7 +53,9 @@
 
         <div class="col-6 col-sm-3 sidebar-offcanvas" id="sidebar">
           <div class="list-group">
-              <a href="javascript:history.back();" class="list-group-item">Вернуться назад</a>
+              
+                  <a href="javascript:history.back();" class="list-group-item">Вернуться назад</a>
+              
           </div>
         </div><!--/span-->
       </div><!--/row-->
@@ -58,7 +63,7 @@
       <hr>
 
       <footer >
-        <p style="font-size: 12px">
+        <p>
             Devman 2017
         </p>
       </footer>

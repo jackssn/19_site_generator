@@ -10,10 +10,11 @@
 
     <link rel="stylesheet" type="text/css" href="../../../static/css/bootstrap.min.css" />
     <link rel="stylesheet" type="text/css" href="../../../static/css/styles.css" />
+    <link rel="stylesheet" type="text/css" href="../../../static/css/codehilite.css" />
 
   </head>
 
-  <body style="background: #f4d647">
+  <body>
     <nav class="navbar navbar-fixed-top navbar-dark bg-inverse">
       <div class="container">
         <a class="navbar-brand" href="../../../www/index.html">
@@ -29,8 +30,9 @@
             <button type="button" class="btn btn-primary btn-sm" data-toggle="offcanvas">Toggle nav</button>
           </p>
           <div class="jumbotron">
-            <h1>Модули</h1>
-            <p><h3>Что это такое</h3>
+              <div class="article">
+                <h1>Модули</h1>
+                <p><h3>Что это такое</h3>
 <p>Модуль – кусок кода, который можно использовать в другом коде. В самом простом случае это файл.
 В любом проекте функциональность разбивается на куски, каждый кусок селится в свой модуль.</p>
 <p>Всё, что устанавливается с помощью pip, представляет собой модули. Модули иерархические:
@@ -170,8 +172,9 @@
 
 <p>Делать так незаконно: это неочевидно, затрудняет отладку и вредит читаемости. Не надо так.</p></p>
 
-              
+                  
 
+              </div>
           </div>
           <div class="row">
 
@@ -180,7 +183,9 @@
 
         <div class="col-6 col-sm-3 sidebar-offcanvas" id="sidebar">
           <div class="list-group">
-              <a href="javascript:history.back();" class="list-group-item">Вернуться назад</a>
+              
+                  <a href="javascript:history.back();" class="list-group-item">Вернуться назад</a>
+              
           </div>
         </div><!--/span-->
       </div><!--/row-->
@@ -188,7 +193,7 @@
       <hr>
 
       <footer >
-        <p style="font-size: 12px">
+        <p>
             Devman 2017
         </p>
       </footer>
