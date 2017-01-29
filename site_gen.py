@@ -73,7 +73,7 @@ if __name__ == "__main__":
 
         article_dict_with_link = create_article_dict_with_link(article_title, article_text, article_link, article_topic)
         articles_dict_with_links.append(article_dict_with_link)
-        save_html_page(article_dict_with_link['link'], article_dict_with_link['context'])
+        save_html_page(article_link, article_dict_with_link['context'])
 
     index_filepath = os.path.join(BASE_PATH, "index.html")
     index_context = {
