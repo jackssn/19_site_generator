@@ -23,34 +23,32 @@
       </div><!-- /.container -->
     </nav><!-- /.navbar -->
 
-    <div class="container">
-      <div class="jumbotron">
-        <div class="row row-offcanvas row-offcanvas-right">
-            <div class="article">
-              <h1>{{ article_title }}</h1>
-                {% if article_text %}
-                  <p>{{ article_text }}</p>
-                {% endif %}
-                {% if articles_dict_with_links %}
-                  {% for topic in topics_dict %}
-                    <div class="col-md-4">
-                        <h4>{{ topic['title'] }}</h4>
+<div class="container">
+      <div class="row row-offcanvas row-offcanvas-right">
+        <div class="col-12 col-sm-9">
+          <div class="jumbotron">
+              <div class="article">
+                <h1>{{ article_title }}</h1>
+                  {% if article_text %}
+                    <p>{{ article_text }}</p>
+                  {% endif %}
+                  {% if articles_dict_with_links %}
+                      {% for article_dict in articles_dict_with_links %}
                         <ul>
-                          {% for article_dict in articles_dict_with_links %}
-                            {% if topic['slug'] == article_dict['topic'] %}
-                              <li><a href="../{{ article_dict['link'] }}">
-                                        {{ article_dict['context']['article_title'] }}</a></li>
-                            {% endif %}
-                          {% endfor %}
+                          <li>
+                              <a href="../{{ article_dict['link'] }}">{{ article_dict['context']['article_title'] }}</a>
+                          </li>
                         </ul>
-                    </div>
-                  {% endfor %}
-                {% endif %}
+                      {% endfor %}
+                  {% endif %}
+              </div>
+          </div>
+        </div><!--/span-->
+
+        <div class="col-6 col-sm-3 sidebar-offcanvas" id="sidebar">
+          <div class="list-group">
               {% if back_btn %}
-                <br>
-                <button type="button" class="btn btn-default">
-                    <a href="javascript:history.back();">Вернуться на главную</a>
-                </button>
+                  <a href="javascript:history.back();" class="list-group-item">Вернуться назад</a>
               {% endif %}
           </div>
         </div><!--/span-->
@@ -58,9 +56,10 @@
       <hr>
       <footer >
         <p>
-            <a href="https://devman.org">Devman.org</a>  2017
+            Devman 2017
         </p>
       </footer>
+
     </div><!--/.container-->
 
 
