@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="ru">
   <head>
-    <meta charset="utf-8">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="Энциклопедия">
@@ -38,7 +38,7 @@
                         <ul>
                           {% for article_dict in articles_dict_with_links %}
                             {% if topic['slug'] == article_dict['topic'] %}
-                              <li><a href="../{{ article_dict['link'] }}">
+                              <li><a href="..\{{ article_dict['link'] }}">
                                         {{ article_dict['context']['article_title'] }}</a></li>
                             {% endif %}
                           {% endfor %}

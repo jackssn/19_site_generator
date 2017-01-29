@@ -69,11 +69,12 @@ if __name__ == "__main__":
         article_topic = article_dict['topic']
         article_slug = '{}.html'.format(os.path.splitext(os.path.basename(article_path))[0])
         article_link = os.path.join(ARTICLES_HTML_PATH, article_topic, article_slug)
+        changed_link = article_link.replace('&amp;', '&')  # it allow create correct html-linked page
         article_text = create_html_from_md(read_md_file(article_path))
 
         article_dict_with_link = create_article_dict_with_link(article_title, article_text, article_link, article_topic)
         articles_dict_with_links.append(article_dict_with_link)
-        save_html_page(article_link, article_dict_with_link['context'])
+        save_html_page(changed_link, article_dict_with_link['context'])
 
     index_filepath = os.path.join(BASE_PATH, "index.html")
     index_context = {
