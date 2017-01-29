@@ -43,18 +43,14 @@ def create_html_from_md(md_text):
     return markdown.markdown(md_text, extensions=['markdown.extensions.codehilite'])
 
 
-def create_article_dict_with_link(raw_article_dict):
-    article_path = raw_article_dict['source']
-    article_topic = raw_article_dict['topic']
-    article_slug = '{}.html'.format(os.path.splitext(os.path.basename(article_path))[0])
-    article_link = os.path.join(ARTICLES_HTML_PATH, article_topic, article_slug)
+def create_article_dict_with_link(title, text, link, topic):
     article_context = {
-        'article_title': raw_article_dict['title'],
-        'article_text': create_html_from_md(read_md_file(article_path)),
+        'article_title': title,
+        'article_text': text,
         'path': '../../../',
         'back_btn': True
     }
-    return {'link': article_link, 'topic': article_topic, 'context': article_context}
+    return {'link': link, 'topic': topic, 'context': article_context}
 
 
 if __name__ == "__main__":
@@ -68,7 +64,14 @@ if __name__ == "__main__":
 
     articles_dict_with_links = []
     for article_dict in articles_dict:
-        article_dict_with_link = create_article_dict_with_link(article_dict)
+        article_title = article_dict['title']
+        article_path = article_dict['source']
+        article_topic = article_dict['topic']
+        article_slug = '{}.html'.format(os.path.splitext(os.path.basename(article_path))[0])
+        article_link = os.path.join(ARTICLES_HTML_PATH, article_topic, article_slug)
+        article_text = create_html_from_md(read_md_file(article_path))
+
+        article_dict_with_link = create_article_dict_with_link(article_title, article_text, article_link, article_topic)
         articles_dict_with_links.append(article_dict_with_link)
         save_html_page(article_dict_with_link['link'], article_dict_with_link['context'])
 
