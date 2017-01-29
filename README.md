@@ -8,11 +8,14 @@
 
 Введите в консоль:
 
-1. `pip3 install -r requirements.txt`
-2. `python site_gen.py`
+`python site_gen.py`
 
-Для корректной работы скрипта необходимо установить пакеты из файла `requirements.txt`, а также иметь файл в формате
-`json` для парсинга исходных страниц. Важно, чтобы папки `templates` и `static` лежали на одном уровне с `site_gen.py`
+Для корректной работы скрипта необходимо установить пакеты из файла `requirements.txt`:
+
+`pip3 install -r requirements.txt`
+
+Также иметь json-файл для парсинга исходных страниц. Важно, чтобы папки `templates` и `static` лежали на одном уровне
+с `site_gen.py`
 
 ## Результат работы
 
@@ -25,4 +28,5 @@ www/index.html
 www/articles/...
 ```
 
-Для просмотра запустите файл  [index.html](https://jackssn.github.io/19_site_generator/www/index.html)
+Для просмотра на локальном компьютере запустите файл `www/index.html`.
+Онлайн-демонстрация доступна [по ссылке](https://jackssn.github.io/19_site_generator/www/index.html)
