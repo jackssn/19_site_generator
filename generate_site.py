@@ -64,15 +64,15 @@ if __name__ == "__main__":
 
     articles_dict_with_links = []
     for article_dict in articles_dict:
-        article_title = article_dict['title']
+        article_title = article_dict['title'].replace('<', '&lt;').replace('>;', '&gt;')  # it shields closed tags
         article_path = article_dict['source']
         article_topic = article_dict['topic']
         article_slug = '{}.html'.format(os.path.splitext(os.path.basename(article_path))[0])
-        article_link = os.path.join(ARTICLES_HTML_PATH, article_topic, article_slug)
+        article_link = os.path.join(ARTICLES_HTML_PATH, article_topic, article_slug).replace('\\', '/')
         changed_link = article_link.replace('&amp;', '&')  # it allow create correct html-linked page
         article_text = create_html_from_md(read_md_file(article_path))
 
-        article_dict_with_link = create_article_dict_with_link(article_title, article_text, article_link, article_topic)
+        article_dict_with_link = create_article_dict_with_link(article_title, article_text, changed_link, article_topic)
         articles_dict_with_links.append(article_dict_with_link)
         save_html_page(changed_link, article_dict_with_link['context'])
 

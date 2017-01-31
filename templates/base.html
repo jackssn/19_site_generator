@@ -38,7 +38,7 @@
                         <ul>
                           {% for article_dict in articles_dict_with_links %}
                             {% if topic['slug'] == article_dict['topic'] %}
-                              <li><a href="..\{{ article_dict['link'] }}">
+                              <li><a href="../{{ article_dict['link'] }}">
                                         {{ article_dict['context']['article_title'] }}</a></li>
                             {% endif %}
                           {% endfor %}
