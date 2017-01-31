@@ -64,7 +64,7 @@ if __name__ == "__main__":
 
     articles_dict_with_links = []
     for article_dict in articles_dict:
-        article_title = article_dict['title'].replace('<', '&lt;').replace('>;', '&gt;')  # it shields closed tags
+        article_title = article_dict['title'].replace('<', '&lt;').replace('>', '&gt;')  # it shields closed tags
         article_path = article_dict['source']
         article_topic = article_dict['topic']
         article_slug = '{}.html'.format(os.path.splitext(os.path.basename(article_path))[0])
