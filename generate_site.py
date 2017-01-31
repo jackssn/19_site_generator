@@ -18,9 +18,9 @@ def render_template(template_filename, context):
     return TEMPLATE_ENVIRONMENT.get_template(template_filename).render(context)
 
 
-def save_html_page(filepath, context):
+def save_html_page(filepath, context, page_type):
     with open(filepath, 'w', encoding='utf-8') as f:
-        html = render_template('templates/base.html', context)
+        html = render_template('templates/{}.html'.format(page_type), context)
         f.write(html)
 
 
@@ -44,13 +44,7 @@ def create_html_from_md(md_text):
 
 
 def create_article_dict_with_link(title, text, link, topic):
-    article_context = {
-        'article_title': title,
-        'article_text': text,
-        'path': '../../../',
-        'back_btn': True
-    }
-    return {'link': link, 'topic': topic, 'context': article_context}
+    return {'link': link, 'topic': topic, 'context': {'title': title, 'article_text': text, 'path': '../../../'}}
 
 
 if __name__ == "__main__":
@@ -64,24 +58,21 @@ if __name__ == "__main__":
 
     articles_dict_with_links = []
     for article_dict in articles_dict:
-        article_title = article_dict['title'].replace('<', '&lt;').replace('>', '&gt;')  # it shields closed tags
-        article_path = article_dict['source']
+        article_title = article_dict['title']
         article_topic = article_dict['topic']
+        article_path = article_dict['source']
         article_slug = '{}.html'.format(os.path.splitext(os.path.basename(article_path))[0])
         article_link = os.path.join(ARTICLES_HTML_PATH, article_topic, article_slug).replace('\\', '/')
-        changed_link = article_link.replace('&amp;', '&')  # it allow create correct html-linked page
         article_text = create_html_from_md(read_md_file(article_path))
 
-        article_dict_with_link = create_article_dict_with_link(article_title, article_text, changed_link, article_topic)
+        article_dict_with_link = create_article_dict_with_link(article_title, article_text, article_link, article_topic)
         articles_dict_with_links.append(article_dict_with_link)
-        save_html_page(changed_link, article_dict_with_link['context'])
+        save_html_page(article_link, article_dict_with_link['context'], page_type='article_page')
 
-    index_filepath = os.path.join(BASE_PATH, "index.html")
     index_context = {
-        'article_title': 'Cписок статей',
+        'title': 'Cписок статей',
         'articles_dict_with_links': articles_dict_with_links,
         'topics_dict': topics_dict,
         'path': '../',
-        'back_btn': False
     }
-    save_html_page(index_filepath, index_context)
+    save_html_page(os.path.join(BASE_PATH, "index.html"), index_context, page_type='index_page')

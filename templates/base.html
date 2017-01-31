@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="Энциклопедия">
 
-    <title>Энциклопедия - {{ article_title }}</title>
+    <title>Энциклопедия - {{ title }}</title>
 
     <link rel="stylesheet" type="text/css" href="{{ path }}static/css/bootstrap.min.css" />
     <link rel="stylesheet" type="text/css" href="{{ path }}static/css/styles.css" />
@@ -27,29 +27,13 @@
       <div class="jumbotron">
         <div class="row row-offcanvas row-offcanvas-right">
             <div class="article">
-              <h1>{{ article_title }}</h1>
-                {% if article_text %}
-                  <p>{{ article_text }}</p>
-                {% endif %}
                 {% if articles_dict_with_links %}
-                  {% for topic in topics_dict %}
-                    <div class="col-md-4">
-                        <h4>{{ topic['title'] }}</h4>
-                        <ul>
-                          {% for article_dict in articles_dict_with_links %}
-                            {% if topic['slug'] == article_dict['topic'] %}
-                              <li><a href="../{{ article_dict['link'] }}">
-                                        {{ article_dict['context']['article_title'] }}</a></li>
-                            {% endif %}
-                          {% endfor %}
-                        </ul>
-                    </div>
-                  {% endfor %}
+                  {% block article_list %}
+                  {% endblock %}
+                {% else %}
+                  {% block article_page %}
+                  {% endblock %}
                 {% endif %}
-              {% if back_btn %}
-                <br>
-                    <a class="btn btn-primary" href="javascript:history.back();">Вернуться на главную</a>
-              {% endif %}
           </div>
         </div><!--/span-->
       </div><!--/row-->

@@ -1,0 +1,17 @@
+{% extends "templates/base.html" %}
+
+{% block article_list %}
+    <h1>{{ title }}</h1>
+    {% for topic in topics_dict %}
+    <div class="col-md-4">
+        <h3>{{ topic['title']|e }}</h3>
+        <ul>
+          {% for article_dict in articles_dict_with_links %}
+            {% if topic['slug'] == article_dict['topic'] %}
+              <li><a href="../{{ article_dict['link']|e }}">{{ article_dict['context']['title']|e }}</a></li>
+            {% endif %}
+          {% endfor %}
+        </ul>
+    </div>
+    {% endfor %}
+{% endblock %}

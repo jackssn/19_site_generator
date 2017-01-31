@@ -1,0 +1,7 @@
+{% extends "templates/base.html" %}
+
+{% block article_page %}
+    <h1>{{ title|e }}</h1>
+        {{ article_text }}
+        <a class="btn btn-primary" href="javascript:history.back();">Вернуться на главную</a>
+{% endblock %}
