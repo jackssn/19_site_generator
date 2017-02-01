@@ -27,13 +27,13 @@
       <div class="jumbotron">
         <div class="row row-offcanvas row-offcanvas-right">
             <div class="article">
-                {% if articles_dict_with_links %}
-                  {% block article_list %}
-                  {% endblock %}
-                {% else %}
-                  {% block article_page %}
-                  {% endblock %}
-                {% endif %}
+                {%- if articles_dict_with_links %}
+                  {%- block article_list %}
+                  {%- endblock %}
+                {%- else %}
+                  {%- block article_page %}
+                  {%- endblock %}
+                {%- endif %}
           </div>
         </div><!--/span-->
       </div><!--/row-->

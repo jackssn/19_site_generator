@@ -70,7 +70,7 @@ if __name__ == "__main__":
         save_html_page(article_link, article_dict_with_link['context'], page_type='article_page')
 
     index_context = {
-        'title': 'Cписок статей',
+        'title': 'Список статей',
         'articles_dict_with_links': articles_dict_with_links,
         'topics_dict': topics_dict,
         'path': '../',
